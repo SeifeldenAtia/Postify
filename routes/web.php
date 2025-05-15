@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ThemeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(ThemeController::class)->name('theme.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/catogory', 'catogory')->name('catogory');
+    Route::get('/contact', 'contact')->name('contact');
+    Route::get('/single-blog', 'singleBlog')->name('singleBlog');
+    Route::get('/login', 'login')->name('login');
+    Route::get('/register', 'register')->name('register');
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
