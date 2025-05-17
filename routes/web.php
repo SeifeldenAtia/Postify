@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\SubscriberController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,9 @@ Route::controller(ThemeController::class)->name('theme.')->group(function () {
 
 // Subscriber routes
 Route::post('subscriber/store', [SubscriberController::class, 'store'])->name('subscriber.store');
+
+// Contact routes
+Route::post('contact/store', [ContactController::class, 'store'])->name('contact.store');
 
 
 Route::get('/dashboard', function () {

@@ -32,27 +32,52 @@
                     </div>
                 </div>
                 <div class="col-md-8 col-lg-9">
-                    <form action="#/" class="form-contact contact_form" action="contact_process.php" method="post"
-                        id="contactForm" novalidate="novalidate">
+                    @if (session('status-contact'))
+                        <div class="alert alert-success">
+                            {{ session('status-contact') }}
+                        </div>
+                    @endif
+                    <form action="{{ route('contact.store') }}" class="form-contact contact_form" method="post">
+                        @csrf
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="form-group">
-                                    <input class="form-control" name="name" id="name" type="text"
+                                    <input class="form-control" name="name" type="text" value="{{ old('name') }}"
                                         placeholder="Enter your name">
+                                    @error('name')
+                                        <div class="alert alert-danger mt-3">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" name="email" id="email" type="email"
+                                    <input class="form-control" name="email" type="email" value="{{ old('email') }}"
                                         placeholder="Enter email address">
+                                    @error('email')
+                                        <div class="alert alert-danger mt-3">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" name="subject" id="subject" type="text"
+                                    <input class="form-control" name="subject" type="text" value="{{ old('subject') }}"
                                         placeholder="Enter Subject">
+                                    @error('subject')
+                                        <div class="alert alert-danger mt-3">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="form-group">
-                                    <textarea class="form-control different-control w-100" name="message" id="message" cols="30" rows="5"
-                                        placeholder="Enter Message"></textarea>
+                                    <textarea class="form-control different-control w-100" name="message" cols="30" rows="5"
+                                        placeholder="Enter Message">{{ old('message') }}</textarea>
+                                    @error('message')
+                                        <div class="alert alert-danger mt-3">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
