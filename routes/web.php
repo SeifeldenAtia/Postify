@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ThemeController;
+use App\Http\Controllers\SubscriberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +16,17 @@ use App\Http\Controllers\ThemeController;
 |
 */
 
+
+// Theme routes
 Route::controller(ThemeController::class)->name('theme.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/catogory', 'catogory')->name('catogory');
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/single-blog', 'singleBlog')->name('singleBlog');
 });
+
+// Subscriber routes
+Route::post('subscriber/store', [SubscriberController::class, 'store'])->name('subscriber.store');
 
 
 Route::get('/dashboard', function () {
