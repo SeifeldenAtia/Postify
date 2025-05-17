@@ -1,3 +1,8 @@
+@php
+    use App\Models\Category;
+    $categories = Category::get();
+@endphp
+
 <!--================Header Menu Area =================-->
 <header class="header_area">
     <div class="main_menu">
@@ -23,12 +28,17 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                 aria-haspopup="true" aria-expanded="false">Categories</a>
                             <ul class="dropdown-menu">
-                                <li class="nav-item "><a class="nav-link" href="{{ route('theme.catogory') }}">Food</a>
-                                </li>
-                                <li class="nav-item "><a class="nav-link"
-                                        href="{{ route('theme.catogory') }}">Bussiness</a></li>
-                                <li class="nav-item "><a class="nav-link"
-                                        href="{{ route('theme.catogory') }}">Travel</a></li>
+                                @if (count($categories) > 0)
+                                    @foreach ($categories as $category)
+                                        <li class="nav-item"><a class="nav-link"
+                                                href="{{ route('theme.catogory') }}">{{ $category->name }}</a>
+                                        </li>
+                                    @endforeach
+                                @else
+                                    <span>No Categories available</span>
+
+                                @endif
+
                             </ul>
                         </li>
                         <li class="nav-item @yield('contact-avtive')"><a class="nav-link"
