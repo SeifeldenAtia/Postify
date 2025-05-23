@@ -6,6 +6,7 @@ use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,9 @@ Route::post('contact/store', [ContactController::class, 'store'])->name('contact
 
 // Blog routes
 Route::resource('blogs', BlogController::class);
+
+// Comment routes
+Route::post('comment/store', [CommentController::class, 'store'])->name('comment.store');
 
 
 Route::get('/dashboard', function () {
