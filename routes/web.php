@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +22,8 @@ use App\Http\Controllers\ContactController;
 // Theme routes
 Route::controller(ThemeController::class)->name('theme.')->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::get('/catogory', 'catogory')->name('catogory');
+    Route::get('/catogory/{id}', 'catogory')->name('catogory');
     Route::get('/contact', 'contact')->name('contact');
-    Route::get('/single-blog', 'singleBlog')->name('singleBlog');
 });
 
 // Subscriber routes
@@ -31,6 +31,9 @@ Route::post('subscriber/store', [SubscriberController::class, 'store'])->name('s
 
 // Contact routes
 Route::post('contact/store', [ContactController::class, 'store'])->name('contact.store');
+
+// Blog routes
+Route::resource('blogs', BlogController::class);
 
 
 Route::get('/dashboard', function () {

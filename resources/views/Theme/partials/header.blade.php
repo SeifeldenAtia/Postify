@@ -31,7 +31,7 @@
                                 @if (count($categories) > 0)
                                     @foreach ($categories as $category)
                                         <li class="nav-item"><a class="nav-link"
-                                                href="{{ route('theme.catogory') }}">{{ $category->name }}</a>
+                                                href="{{ route('theme.catogory', ['id' => $category->id]) }}">{{ $category->name }}</a>
                                         </li>
                                     @endforeach
                                 @else
@@ -45,21 +45,22 @@
                                 href="{{ route('theme.contact') }}">Contact</a></li>
                     </ul>
 
-                    <!-- Add new blog -->
-                    <a href="#" class="btn btn-sm btn-primary mr-2">Add New</a>
-                    <!-- End - Add new blog -->
-
-                    <ul class="nav navbar-nav navbar-right navbar-social">
-                        @auth
+                    @auth
+                        <!-- Add new blog -->
+                        <a href="{{ route('blogs.create') }}" class="btn btn-sm btn-primary mr-2">Add New</a>
+                        <!-- End - Add new blog -->
+                        <ul class="nav navbar-nav navbar-right navbar-social">
                             <li class="nav-item submenu dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                     aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="blog-details.html">My Blogs</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('blogs.index') }}">My Blogs</a>
+                                    </li>
                                     <li class="nav-item">
-                                        <form action="{{ route('logout') }}" method="post">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="post">
                                             @csrf
-                                            <a class="nav-link" href="javascript:$('form').submit();">Logout</a>
+                                            <a class="nav-link" href="#"
+                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                         </form>
 
                                     </li>
